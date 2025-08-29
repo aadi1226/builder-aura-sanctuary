@@ -69,11 +69,15 @@ export default function Signup() {
   return (
     <div className="max-w-md mx-auto">
       <h1 className="text-3xl font-bold mb-6">Create your account</h1>
-      <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID || ""}>
-        <div className="mb-6">
-          <GoogleLogin onSuccess={(r) => onGoogle(r.credential)} onError={() => setError("Google login failed")}/>
-        </div>
-      </GoogleOAuthProvider>
+      {import.meta.env.VITE_GOOGLE_CLIENT_ID ? (
+        <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
+          <div className="mb-6">
+            <GoogleLogin onSuccess={(r) => onGoogle(r.credential)} onError={() => setError("Google login failed")} />
+          </div>
+        </GoogleOAuthProvider>
+      ) : (
+        <p className="text-sm text-muted-foreground mb-6">Google sign-up is unavailable until a client ID is configured.</p>
+      )}
       <div className="border-t pt-6 mt-6">
         {step === "email" ? (
           <form onSubmit={handleRequestOtp} className="space-y-3">
