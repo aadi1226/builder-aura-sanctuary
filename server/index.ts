@@ -3,7 +3,14 @@ import express from "express";
 import cors from "cors";
 import { handleDemo } from "./routes/demo";
 import cookieParser from "cookie-parser";
-import { cookieMiddleware, googleAuth, logout, me, requestOtp, verifyOtp } from "./routes/auth";
+import {
+  cookieMiddleware,
+  googleAuth,
+  logout,
+  me,
+  requestOtp,
+  verifyOtp,
+} from "./routes/auth";
 import { createNote, deleteNote, listNotes } from "./routes/notes";
 
 export function createServer() {

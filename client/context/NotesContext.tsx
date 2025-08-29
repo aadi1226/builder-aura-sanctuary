@@ -41,7 +41,10 @@ export function NotesProvider({ children }: { children: React.ReactNode }) {
     setNotes((prev) => prev.filter((n) => n.id !== id));
   }
 
-  const value = useMemo(() => ({ notes, loading, refresh, add, remove }), [notes, loading]);
+  const value = useMemo(
+    () => ({ notes, loading, refresh, add, remove }),
+    [notes, loading],
+  );
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }

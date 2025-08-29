@@ -13,7 +13,9 @@ export const authService = {
   verifyOtp: (payload: VerifyOtpRequest) =>
     api.post<AuthResponse>("/api/auth/verify-otp", payload),
   google: (credential: string) =>
-    api.post<AuthResponse>("/api/auth/google", { credential } as GoogleAuthRequest),
+    api.post<AuthResponse>("/api/auth/google", {
+      credential,
+    } as GoogleAuthRequest),
   me: () => api.get<AuthResponse>("/api/auth/me"),
   logout: () => api.post<{ message: string }>("/api/auth/logout"),
 };

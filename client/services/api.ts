@@ -15,7 +15,9 @@ async function request<T>(url: string, options: RequestInit = {}): Promise<T> {
   });
 
   const contentType = res.headers.get("content-type") || "";
-  const body = contentType.includes("application/json") ? await res.json() : undefined;
+  const body = contentType.includes("application/json")
+    ? await res.json()
+    : undefined;
 
   if (!res.ok) {
     const err = (body as ApiError) || { error: res.statusText };
@@ -28,6 +30,9 @@ async function request<T>(url: string, options: RequestInit = {}): Promise<T> {
 export const api = {
   get: <T>(url: string) => request<T>(url),
   post: <T>(url: string, data?: unknown) =>
-    request<T>(url, { method: "POST", body: data ? JSON.stringify(data) : undefined }),
+    request<T>(url, {
+      method: "POST",
+      body: data ? JSON.stringify(data) : undefined,
+    }),
   del: <T>(url: string) => request<T>(url, { method: "DELETE" }),
 };

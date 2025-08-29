@@ -1,4 +1,11 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { authService } from "@/services/auth";
 import type { User } from "@shared/api";
 
@@ -32,10 +39,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return res.devOtp;
   }, []);
 
-  const verifyOtp = useCallback(async (email: string, otp: string, name?: string) => {
-    const { user } = await authService.verifyOtp({ email, otp, name });
-    setUser(user);
-  }, []);
+  const verifyOtp = useCallback(
+    async (email: string, otp: string, name?: string) => {
+      const { user } = await authService.verifyOtp({ email, otp, name });
+      setUser(user);
+    },
+    [],
+  );
 
   const loginWithGoogle = useCallback(async (credential: string) => {
     const { user } = await authService.google(credential);

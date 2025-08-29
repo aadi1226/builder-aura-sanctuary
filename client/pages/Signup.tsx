@@ -6,7 +6,10 @@ import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
 
 const emailSchema = z.string().email("Enter a valid email");
-const otpSchema = z.string().min(4, "OTP must be 4-6 digits").max(6, "OTP must be 4-6 digits");
+const otpSchema = z
+  .string()
+  .min(4, "OTP must be 4-6 digits")
+  .max(6, "OTP must be 4-6 digits");
 
 export default function Signup() {
   const { requestOtp, verifyOtp, loginWithGoogle } = useAuth();
@@ -72,41 +75,73 @@ export default function Signup() {
       {import.meta.env.VITE_GOOGLE_CLIENT_ID ? (
         <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
           <div className="mb-6">
-            <GoogleLogin onSuccess={(r) => onGoogle(r.credential)} onError={() => setError("Google login failed")} />
+            <GoogleLogin
+              onSuccess={(r) => onGoogle(r.credential)}
+              onError={() => setError("Google login failed")}
+            />
           </div>
         </GoogleOAuthProvider>
       ) : (
-        <p className="text-sm text-muted-foreground mb-6">Google sign-up is unavailable until a client ID is configured.</p>
+        <p className="text-sm text-muted-foreground mb-6">
+          Google sign-up is unavailable until a client ID is configured.
+        </p>
       )}
       <div className="border-t pt-6 mt-6">
         {step === "email" ? (
           <form onSubmit={handleRequestOtp} className="space-y-3">
             <div>
               <label className="block text-sm mb-1">Name</label>
-              <input className="w-full border rounded-md px-3 py-2" placeholder="Jane Doe" value={name} onChange={(e)=>setName(e.target.value)} />
+              <input
+                className="w-full border rounded-md px-3 py-2"
+                placeholder="Jane Doe"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
             </div>
             <div>
               <label className="block text-sm mb-1">Email</label>
-              <input className="w-full border rounded-md px-3 py-2" placeholder="jane@example.com" value={email} onChange={(e)=>setEmail(e.target.value)} />
+              <input
+                className="w-full border rounded-md px-3 py-2"
+                placeholder="jane@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </div>
             {error && <p className="text-destructive text-sm">{error}</p>}
-            <button disabled={loading} className="w-full inline-flex items-center justify-center rounded-md bg-primary text-primary-foreground px-4 py-2 font-medium disabled:opacity-60">
+            <button
+              disabled={loading}
+              className="w-full inline-flex items-center justify-center rounded-md bg-primary text-primary-foreground px-4 py-2 font-medium disabled:opacity-60"
+            >
               {loading ? <LoadingSpinner /> : "Send OTP"}
             </button>
-            {devOtp && <p className="text-xs text-muted-foreground">Dev OTP: {devOtp}</p>}
+            {devOtp && (
+              <p className="text-xs text-muted-foreground">Dev OTP: {devOtp}</p>
+            )}
           </form>
         ) : (
           <form onSubmit={handleVerify} className="space-y-3">
             <div>
               <label className="block text-sm mb-1">Email</label>
-              <input className="w-full border rounded-md px-3 py-2" value={email} onChange={(e)=>setEmail(e.target.value)} />
+              <input
+                className="w-full border rounded-md px-3 py-2"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </div>
             <div>
               <label className="block text-sm mb-1">OTP</label>
-              <input className="w-full border rounded-md px-3 py-2" placeholder="Enter 4-6 digit code" value={otp} onChange={(e)=>setOtp(e.target.value)} />
+              <input
+                className="w-full border rounded-md px-3 py-2"
+                placeholder="Enter 4-6 digit code"
+                value={otp}
+                onChange={(e) => setOtp(e.target.value)}
+              />
             </div>
             {error && <p className="text-destructive text-sm">{error}</p>}
-            <button disabled={loading} className="w-full inline-flex items-center justify-center rounded-md bg-primary text-primary-foreground px-4 py-2 font-medium disabled:opacity-60">
+            <button
+              disabled={loading}
+              className="w-full inline-flex items-center justify-center rounded-md bg-primary text-primary-foreground px-4 py-2 font-medium disabled:opacity-60"
+            >
               {loading ? <LoadingSpinner /> : "Verify & Continue"}
             </button>
           </form>

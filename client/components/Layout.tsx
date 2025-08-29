@@ -11,16 +11,57 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             NoteStack
           </Link>
           <nav className="flex items-center gap-4 text-sm">
-            <NavLink to="/" className={({ isActive }) => (isActive ? "text-primary" : "text-muted-foreground hover:text-foreground")}>Home</NavLink>
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-primary"
+                  : "text-muted-foreground hover:text-foreground"
+              }
+            >
+              Home
+            </NavLink>
             {user ? (
               <>
-                <NavLink to="/dashboard" className={({ isActive }) => (isActive ? "text-primary" : "text-muted-foreground hover:text-foreground")}>Dashboard</NavLink>
-                <button className="text-muted-foreground hover:text-destructive" onClick={() => logout()}>Logout</button>
+                <NavLink
+                  to="/dashboard"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-primary"
+                      : "text-muted-foreground hover:text-foreground"
+                  }
+                >
+                  Dashboard
+                </NavLink>
+                <button
+                  className="text-muted-foreground hover:text-destructive"
+                  onClick={() => logout()}
+                >
+                  Logout
+                </button>
               </>
             ) : (
               <>
-                <NavLink to="/login" className={({ isActive }) => (isActive ? "text-primary" : "text-muted-foreground hover:text-foreground")}>Login</NavLink>
-                <NavLink to="/signup" className={({ isActive }) => (isActive ? "text-primary" : "text-muted-foreground hover:text-foreground")}>Signup</NavLink>
+                <NavLink
+                  to="/login"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-primary"
+                      : "text-muted-foreground hover:text-foreground"
+                  }
+                >
+                  Login
+                </NavLink>
+                <NavLink
+                  to="/signup"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-primary"
+                      : "text-muted-foreground hover:text-foreground"
+                  }
+                >
+                  Signup
+                </NavLink>
               </>
             )}
           </nav>
